@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.env
+.npm-cache/
+.aws-inventory/
+ssm-params.json
+
+# Test/build output
+coverage/
+*.tsbuildinfo
+*.log
+npm-debug.log*
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Assignment source document (kept locally, not submitted)
+LAB.md.docx
