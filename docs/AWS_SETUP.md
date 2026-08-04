@@ -45,4 +45,4 @@ unzip -q /tmp/awscliv2.zip -d /tmp
 rm -rf /tmp/aws /tmp/awscliv2.zip
 ```
 
-Before provisioning anything, use the workflow's default cloud-free mode. If real evidence is required, create the infrastructure and manually run the workflow with `deploy=true`, capture the evidence listed in `SUBMISSION.md`, and then follow `CLEANUP.md`.
+Pushes to `main` perform the complete deployment required by the lab. A manual workflow run with the default `deploy=false` remains available for cloud-free validation. After a real deployment, capture the evidence listed in `SUBMISSION.md` and then follow `CLEANUP.md`.

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       deploy:
-        description: Push to Docker Hub and deploy to AWS
+        description: Push and deploy when manually running this workflow
         type: boolean
         default: false
 
@@ -38,7 +38,7 @@ jobs:
   build-and-push:
     name: Push immutable and latest tags
     needs: validate
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy == true
+    if: github.event_name == 'push' || inputs.deploy == true
     runs-on: ubuntu-latest
     steps:
       - name: Check required deployment secrets

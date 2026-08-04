@@ -38,6 +38,6 @@ Do not commit `.env`. AWS access keys are neither required nor supported by the 
 
 ## Cloud-free completion mode
 
-Every push runs the `Build, push and deploy` workflow in cloud-free validation mode. A manual run also validates only by default. Docker Hub push and AWS deployment happen only when the workflow is started manually with `deploy=true`, after all required secrets and infrastructure have been configured.
+Every push to `main` validates the image, pushes immutable SHA and `latest` tags to Docker Hub, and deploys through GitHub OIDC and AWS Systems Manager. A manual run validates only by default; set `deploy=true` to perform a real manual deployment.
 
 See [docs/AWS_SETUP.md](docs/AWS_SETUP.md) before a real deployment and [docs/CLEANUP.md](docs/CLEANUP.md) immediately afterward.

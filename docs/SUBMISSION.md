@@ -3,7 +3,7 @@
 ## Repository evidence
 
 - CI workflow is green for lint/typecheck, MongoDB-backed tests and Docker build.
-- Deploy workflow push or manual run with `deploy=false` is green without cloud access.
+- Deploy workflow push to `main` completes build-and-push and AWS deployment.
 - Repository is private and source files are at root.
 - No `.env`, credentials, AWS keys or generated `dist/` content is committed.
 
