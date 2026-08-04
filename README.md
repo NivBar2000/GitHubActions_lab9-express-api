@@ -38,6 +38,6 @@ Do not commit `.env`. AWS access keys are neither required nor supported by the 
 
 ## Cloud-free completion mode
 
-Run `Build, push and deploy` manually with its default `dry_run=true`. This builds and validates the deployment artifact but skips Docker Hub login, image push, OIDC, Parameter Store and SSM. A real push to `main` performs the lab deployment after all required secrets and infrastructure have been configured.
+Every push runs the `Build, push and deploy` workflow in cloud-free validation mode. A manual run also validates only by default. Docker Hub push and AWS deployment happen only when the workflow is started manually with `deploy=true`, after all required secrets and infrastructure have been configured.
 
 See [docs/AWS_SETUP.md](docs/AWS_SETUP.md) before a real deployment and [docs/CLEANUP.md](docs/CLEANUP.md) immediately afterward.

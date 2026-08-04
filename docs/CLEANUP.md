@@ -1,6 +1,6 @@
 # AWS cleanup and cost-control checklist
 
-No AWS resources are created by local validation or by the workflow's default manual `dry_run=true` path. Therefore no AWS cleanup is necessary unless you deliberately performed a real deployment.
+No AWS resources are created by local validation, pushes, or the workflow's default manual `deploy=false` path. Therefore no AWS cleanup is necessary unless you deliberately ran the workflow manually with `deploy=true`.
 
 For a real deployment, first run `scripts/aws-inventory.sh` to capture what exists. Delete only resources whose names and tags identify this lab, in this order:
 

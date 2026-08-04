@@ -45,4 +45,4 @@ unzip -q /tmp/awscliv2.zip -d /tmp
 rm -rf /tmp/aws /tmp/awscliv2.zip
 ```
 
-Before provisioning anything, prefer the workflow's cloud-free `dry_run=true` mode. If real evidence is required, create the infrastructure, run one deployment, capture the evidence listed in `SUBMISSION.md`, and then follow `CLEANUP.md`.
+Before provisioning anything, use the workflow's default cloud-free mode. If real evidence is required, create the infrastructure and manually run the workflow with `deploy=true`, capture the evidence listed in `SUBMISSION.md`, and then follow `CLEANUP.md`.

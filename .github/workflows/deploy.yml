@@ -5,10 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
     inputs:
-      dry_run:
-        description: Validate the image without Docker Hub or AWS changes
+      deploy:
+        description: Push to Docker Hub and deploy to AWS
         type: boolean
-        default: true
+        default: false
 
 permissions:
   contents: read
@@ -38,9 +38,31 @@ jobs:
   build-and-push:
     name: Push immutable and latest tags
     needs: validate
-    if: github.event_name == 'push' || inputs.dry_run == false
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy == true
     runs-on: ubuntu-latest
     steps:
+      - name: Check required deployment secrets
+        shell: bash
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+          ASG_NAME: ${{ secrets.ASG_NAME }}
+          ALB_DNS_NAME: ${{ secrets.ALB_DNS_NAME }}
+        run: |
+          set -euo pipefail
+          missing=()
+          for name in DOCKERHUB_USERNAME DOCKERHUB_TOKEN MONGODB_URI AWS_ROLE_ARN ASG_NAME ALB_DNS_NAME; do
+            if [[ -z "${!name:-}" ]]; then
+              missing+=("$name")
+            fi
+          done
+          if (( ${#missing[@]} > 0 )); then
+            printf 'Missing required GitHub Actions secrets: %s\n' "${missing[*]}" >&2
+            exit 1
+          fi
+
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
